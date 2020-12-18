@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require clipboard
 //= require_tree .
 
+const setGon = (audio_src) => {
+  gon.audio_src = audio_src
+}
