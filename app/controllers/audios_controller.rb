@@ -28,8 +28,8 @@ class AudiosController < ApplicationController
 
     respond_to do |format|
       if @audio.save
-        format.html { redirect_to @audio, notice: 'Audio was successfully created.' }
-        format.json { render :show, status: :created, location: @audio }
+        format.html { redirect_to audios_url, notice: 'Audio was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @audio.errors, status: :unprocessable_entity }
@@ -42,8 +42,8 @@ class AudiosController < ApplicationController
   def update
     respond_to do |format|
       if @audio.update(audio_params)
-        format.html { redirect_to @audio, notice: 'Audio was successfully updated.' }
-        format.json { render :show, status: :ok, location: @audio }
+        format.html { redirect_to audios_url, notice: 'Audio was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @audio.errors, status: :unprocessable_entity }

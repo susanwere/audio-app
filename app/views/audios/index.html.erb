@@ -1,37 +1,40 @@
 <p id="notice"><%= notice %></p>
+<div class="audio">
+<h1 class="audio-title">Audios</h1>
 
-<h1>Audios</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Audio</th>
-      <th>Embedded Audio</th>
-      <th>Embedded Text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @audios.each do |audio| %>
+<div class="a-table">
+  <table class="audio-table">
+    <thead>
       <tr>
-        <td><%= audio.title %></td>
-        <td><%= audio_tag(audio.audio, autoplay: false, controls: true)%>
-        <td>
-          <%= button_tag 'Copy Link To Embed', 
-                class: "clipboard-btn", 
-                type: 'button', 
-                'data-clipboard-text': "https://audio-a.herokuapp.com/audios/#{audio.id}" %>
-        </td>
-        <td><%= link_to 'Show', audio %></td>
-        <td><%= link_to 'Edit', edit_audio_path(audio) %></td>
-        <td><%= link_to 'Destroy', audio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Audio</th>
+        <th>Embedded Audio</th>
+        <th>Embed</th>
+        <th colspan="3"></th>
       </tr>
-</iframe>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @audios.each do |audio| %>
+        <tr>
+          <td><%= audio.title %></td>
+          <td><%= audio_tag(audio.audio, autoplay: false, controls: true, controlsList: "nodownload")%>
+          <td>
+            <%= button_tag 'Copy Link To Embed', 
+                  class: "clipboard-btn", 
+                  type: 'button', 
+                  onclick: "setGon('#{audio.audio}')",
+                  'data-clipboard-text': "<script type='text/javascript' src='https://audio-a.herokuapp.com#{ asset_path('play.js') }?audio_src=#{audio.audio}' id='script_id'></script>" %>
+          </td>
+        </tr>
+  </iframe>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'New Audio', new_audio_path %>
+<%= link_to 'New Audio', new_audio_path, class: "path" %>
+
+</div>
+
